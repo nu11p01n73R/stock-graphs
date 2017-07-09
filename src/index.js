@@ -1,9 +1,12 @@
 import express from 'express'
-import sayHello from './app'
+import main from './templates/template'
 
 const app = express()
+
+app.use('/static', express.static('public'))
+
 app.get('/', function(req, res) {
-        res.send(sayHello("world!!"))
+        res.send(main)
 });
 
 
