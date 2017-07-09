@@ -1,0 +1,8 @@
+# Ignore vim files
+*sw*
+
+# Ignore node modules
+node_modules
+
+# Ignore dist directory
+dist
