@@ -9,6 +9,6 @@ const main =
         <h1>Hello World</h1>
 		<canvas id="myChart" width="400" height="400"></canvas>
       </body>
-      <script type="text/javascript" src="static/js/app.js"></script>
+      <script type="text/javascript" src="static/app.js"></script>
     </html>`
 export default main

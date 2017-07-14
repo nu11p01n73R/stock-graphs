@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node src",
-    "prod:build": "rm -r dist && babel src -d dist",
-    "prod:start": "node dist"
+    "start": "babel src/client -d dist/client && nodemon --exec babel-node src/server"
   },
   "author": "",
   "license": "ISC",
