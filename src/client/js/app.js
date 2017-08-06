@@ -60,7 +60,7 @@ function drawChart(chart, labels, data, mixed) {
 }
 
 function getChart() {
-        var ctx = document.getElementById("myChart").getContext('2d');
+        var ctx = document.getElementById("chart").getContext('2d');
         return new Chart(ctx, {
                 type: 'bar',
                 options: {
@@ -81,7 +81,7 @@ const input = document.getElementById('scid')
 var chart = getChart()
 
 analyse.addEventListener('click', () => {
-        var scids = input.value.toUpperCase()
+        var scids = input.value.toUpperCase().replace(/ /g, '')
         if (scids.length > 0) {
                 var params = 'scid=' + scids.split(',').join('&scid=')
                 var url = 'pe?' + params
