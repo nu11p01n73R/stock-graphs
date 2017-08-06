@@ -5,7 +5,8 @@ import transform from './transform.service'
 
 const app = express()
 
-app.use('/static', express.static('dist/client'))
+app.use('/static', express.static('dist/client/js'))
+app.use('/static', express.static('dist/client/css'))
 
 app.get('/', (req, res) => {
         res.send(main)
