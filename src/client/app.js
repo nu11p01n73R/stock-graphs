@@ -19,36 +19,77 @@ function get(url) {
         });
 }
 
-function drawChart(labels, data) {
-        console.log(labels, data)
-        var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-                labels: labels,
-                datasets: [{
-                label: '# of Votes',
-                data: data,
-                borderWidth: 1
-                }]
-        },
-        options: {
-                responsive: false,
-                scales: {
-                yAxes: [{
-                        ticks: {
-                        beginAtZero: false
-                        }
-                }]
-                }
-        }
-        });
+function getRandomColor() {
+        return Math.floor(Math.random() * 256)
 }
 
-var url = 'pe?scid=FB&scid=HDF01'
-get(url).then(data => {
-        console.log(data, typeof data)
-        drawChart(data.labels, data.pe)
-        }).catch(console.log)
-        
+function getColors(length) {
+        var colors = []
+        for (var i = 0; i < length; i++) {
+                colors.push(
+                      'rgba(' + getRandomColor() + ', ' + getRandomColor() + ', ' + getRandomColor() + ', 0.5)'
+                )
+        }
+        return colors
+}
 
+function drawChart(chart, labels, data, mixed) {
+        var colors = getColors(labels.length)
+        var datasets = [{
+                label: 'P/E Ratio',
+                data: data,
+                borderWidth: 1,
+                backgroundColor: colors
+        }]
+
+        if (typeof mixed !== 'undefined') {
+                datasets.push({
+                        label: 'Industry P/E',
+                        data: mixed,
+                        type: 'line',
+                        backgroundColor: ['rgba(0, 0, 0, 0.6)'],
+                        fill: false
+                })
+        }
+
+        chart.data = {
+                labels: labels,
+                datasets:  datasets
+        };
+        chart.update();
+}
+
+function getChart() {
+        var ctx = document.getElementById("myChart").getContext('2d');
+        return new Chart(ctx, {
+                type: 'bar',
+                options: {
+                        responsive: false,
+                        scales: {
+                                yAxes: [{
+                                        ticks: {
+                                                beginAtZero: false
+                                        }
+                                }]
+                        }
+                }
+        })
+}
+
+const analyse = document.getElementById('analyse')
+const input = document.getElementById('scid')
+var chart = getChart()
+
+analyse.addEventListener('click', () => {
+        var scids = input.value.toUpperCase()
+        if (scids.length > 0) {
+                var params = 'scid=' + scids.split(',').join('&scid=')
+                var url = 'pe?' + params
+
+                get(url).then(data => {
+                        console.log(data, typeof data)
+                        drawChart(chart, data.labels, data.pe, data.industry_pe)
+                        }).catch(console.log)
+        }
+})
+        
