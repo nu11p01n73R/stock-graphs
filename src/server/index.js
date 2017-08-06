@@ -1,7 +1,7 @@
 import express from 'express'
 import main from '../templates/template'
 import get from './http.service'
-import pe_ratio from './transform.service'
+import transform from './transform.service'
 
 const app = express()
 
@@ -14,16 +14,23 @@ app.get('/', (req, res) => {
 app.get('/:type', (req, res) => {
         var scid = req.query.scid
         if (typeof scid === 'undefined') {
-                res.status(400).send("Missing scid")
+                return res.status(400).send("Missing scid")
         }
+
+        var transformFunc = transform[req.params.type]
+        if (typeof transformFunc === 'undefined') {
+                return res.status(400).send("Unsupported type")
+        }
+
 
         get(req.params.type, {
                 scid: scid
         })
-        .then(pe_ratio)
+        .then(transformFunc)
         .then(res.json.bind(res))
         .catch(err => {
-               res.status(500).send("Something went wrong")
+                console.log(err)
+               return res.status(500).send("Something went wrong")
         })
 })
 

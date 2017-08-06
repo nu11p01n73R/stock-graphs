@@ -17,4 +17,8 @@ function pe_ratio(response) {
         }
 }
 
-export default pe_ratio
+const transform = {
+        pe: pe_ratio
+}
+
+export default transform
