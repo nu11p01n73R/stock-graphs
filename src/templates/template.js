@@ -7,7 +7,7 @@ const main =
       </head>
       <body>
         <h1>Hello World</h1>
-		<canvas id="myChart" width="400" height="400"></canvas>
+		<canvas id="myChart" width="1000" height="500"></canvas>
       </body>
       <script type="text/javascript" src="static/app.js"></script>
     </html>`
