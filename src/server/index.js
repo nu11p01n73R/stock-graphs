@@ -12,6 +12,13 @@ app.get('/', (req, res) => {
         res.send(main)
 })
 
+app.get('/list', (req, res) => {
+        get('list')
+                .then(res => res.data)
+                .then(res.json.bind(res))
+                .catch(err => res.status(500).send("Something went wrong"))
+})
+
 app.get('/:type', (req, res) => {
         var scid = req.query.scid
         if (typeof scid === 'undefined') {
@@ -34,6 +41,7 @@ app.get('/:type', (req, res) => {
                return res.status(500).send("Something went wrong")
         })
 })
+
 
 app.listen(3000, function() {
         console.log('Listening')

@@ -3,7 +3,8 @@ import querystring from 'querystring'
 import {api_conf} from '../config/config-local'
 
 const routes = {
-    pe: 'overview'
+    pe: 'overview',
+    list: 'stocks'
 }
 
 function buildUrl(type, params) {

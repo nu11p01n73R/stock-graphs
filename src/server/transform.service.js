@@ -18,7 +18,7 @@ function pe_ratio(response) {
 }
 
 const transform = {
-        pe: pe_ratio
+        pe: pe_ratio,
 }
 
 export default transform
