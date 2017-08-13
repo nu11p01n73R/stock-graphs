@@ -130,6 +130,8 @@ function select(e) {
         if  (!selected.hasOwnProperty(name)) {
                 var div = document.createElement('div')
                 div.innerHTML = name
+                div.className = 'stock-tile'
+
                 elements.select.appendChild(div)
                 div.addEventListener('click', remove)
 

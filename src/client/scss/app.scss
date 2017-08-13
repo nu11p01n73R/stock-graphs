@@ -24,5 +24,29 @@ body {
                         font-weight: 600;
                 }
 
+                #scid-input {
+			width: 700px;
+    			margin: auto;
+    			height: 50px;
+
+
+                        .stock-tile {
+  				background: #127f17;
+  				color: white;
+  				padding: 10px;
+  				min-width: 50px;
+  				height: 15px;
+  				margin: 2px;
+  				float: left;
+  				font-weight: 600;
+				border-radius: 3px;
+			}
+
+			.stock-tile:hover {
+				background: #c32a2a;
+			}
+                }
+
         }
+
 }
