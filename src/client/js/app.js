@@ -119,21 +119,29 @@ function listSuggestions(filtered) {
         for (var i in filtered) {
                 var div = document.createElement('div')
                 div.innerHTML = filtered[i]
-                div.addEventListener('click', addToInput)
+                div.addEventListener('click', select)
 
                 elements.sugg.appendChild(div)
         }
 }
 
-function addToInput(e) {
+function select(e) {
         var name = e.target.innerHTML
         if  (!selected.hasOwnProperty(name)) {
                 var div = document.createElement('div')
                 div.innerHTML = name
                 elements.select.appendChild(div)
+                div.addEventListener('click', remove)
 
                 selected[name] = stocks[name]
         }
+}
+
+function remove(e) {
+        var name = e.target.innerHTML
+        delete selected[name]
+
+        elements.select.removeChild(e.target)
 }
 
 function analyse() {
