@@ -119,8 +119,9 @@ function listSuggestions(filtered) {
         for (var i in filtered) {
                 var div = document.createElement('div')
                 div.innerHTML = filtered[i]
-                div.addEventListener('click', select)
+		div.className = 'sugg-tile'
 
+                div.addEventListener('click', select)
                 elements.sugg.appendChild(div)
         }
 }

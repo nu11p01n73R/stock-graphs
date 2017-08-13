@@ -1,5 +1,7 @@
 body {
         text-align: center;
+	font-family: "Helvetica Neue";
+	font-size: 13px;
 
         #chart {
                 margin: auto;
@@ -15,37 +17,43 @@ body {
                 }
 
                 #analyse {
+			margin: 10px;
                         background: rgb(28, 184, 65);
                         color: white;
                         border-width: 0;
                         height: 27px;
                         width: 70px;
-                        font-size: 13px;
                         font-weight: 600;
                 }
 
-                #scid-input {
-			width: 700px;
-    			margin: auto;
-    			height: 50px;
+		#suggestions, #scid-input {
+			width: 44%;
+			height: 250px;
+			float: left;
+    			border: 1px solid #d6cece;
+    			margin: 20px;
+    			padding: 5px;
+    			overflow: hidden;
 
+		}
 
-                        .stock-tile {
+                        .stock-tile, .sugg-tile {
   				background: #127f17;
   				color: white;
   				padding: 10px;
   				min-width: 50px;
-  				height: 15px;
+  				height: 10px;
+				line-height: 10px;
   				margin: 2px;
   				float: left;
-  				font-weight: 600;
+  				font-weight: 500;
 				border-radius: 3px;
+				cursor: pointer;
 			}
 
 			.stock-tile:hover {
-				background: #c32a2a;
+				background: #e80c0c;
 			}
-                }
 
         }
 
