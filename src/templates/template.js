@@ -7,8 +7,14 @@ const main =
       </head>
       <body>
                 <div class="analyse-form">
-                        <input type="text" id="scid">
+                        <input id="scid" type="text"> 
                         <button id="analyse">Analyse</button>
+                        <h3>Suggestions</h3>
+                        <div id="suggestions">
+                        </div>
+                        <h3>Selected</h3>
+                        <div id="scid-input">
+                        </div>
                 </div>
                 <canvas id="chart" width="1000" height="500"></canvas>
       </body>

@@ -76,20 +76,93 @@ function getChart() {
         })
 }
 
-const analyse = document.getElementById('analyse')
-const input = document.getElementById('scid')
-var chart = getChart()
+function initialiseChart() {
+        const analyse = document.getElementById('analyse')
+        const input = document.getElementById('scid')
+        var chart = getChart()
 
-analyse.addEventListener('click', () => {
-        var scids = input.value.toUpperCase().replace(/ /g, '')
-        if (scids.length > 0) {
-                var params = 'scid=' + scids.split(',').join('&scid=')
-                var url = 'pe?' + params
+        analyse.addEventListener('click', () => {
+                var scids = input.value.toUpperCase().replace(/ /g, '')
+                if (scids.length > 0) {
+                        var params = 'scid=' + scids.split(',').join('&scid=')
+                        var url = 'pe?' + params
 
-                get(url).then(data => {
-                        console.log(data, typeof data)
-                        drawChart(chart, data.labels, data.pe, data.industry_pe)
-                        }).catch(console.log)
+                        get(url).then(data => {
+                                console.log(data, typeof data)
+                                drawChart(chart, data.labels, data.pe, data.industry_pe)
+                                }).catch(console.log)
+                }
+        })
+}
+
+
+function search() {
+        console.log("here")
+        var query = elements.input.value
+
+        filtered = []
+        if (query.length) {
+                var filtered = Object.keys(stocks)
+                        .filter(name => name.toLowerCase().indexOf(query) != -1)
         }
-})
+
+        listSuggestions(filtered)
+}
+
+function listSuggestions(filtered) {
+        while (elements.sugg.firstChild) {
+                elements.sugg.removeChild(
+                        elements.sugg.firstChild
+                )
+        }
+
+        for (var i in filtered) {
+                var div = document.createElement('div')
+                div.innerHTML = filtered[i]
+                div.addEventListener('click', addToInput)
+
+                elements.sugg.appendChild(div)
+        }
+}
+
+function addToInput(e) {
+        var name = e.target.innerHTML
+        if  (!selected.hasOwnProperty(name)) {
+                var div = document.createElement('div')
+                div.innerHTML = name
+                elements.select.appendChild(div)
+
+                selected[name] = stocks[name]
+        }
+}
+
+function analyse() {
+        var params = Object.values(selected)
+        if (params.length) {
+                var url = 'pe?scid=' + params.join('&scid=')
+                get(url).then(data => {
+                        drawChart(elements.chart, data.labels, data.pe, data.industry_pe)
+                })
+        }
+}
+
+function bind() {
+        elements.input.addEventListener('keyup', search)
+        elements.submit.addEventListener('click', analyse)
+}
         
+var elements = {
+        submit: document.getElementById('analyse'),
+        input: document.getElementById('scid'),
+        sugg: document.getElementById('suggestions'),
+        select: document.getElementById('scid-input'),
+        chart: getChart()
+}
+
+var stocks = {}
+var selected = {}
+get('list').then(data => {
+        stocks = data
+})
+bind()
+//initialiseChart()
