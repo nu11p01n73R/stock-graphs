@@ -4,14 +4,19 @@
   "description": "Fundamental Analysis",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "node-sass src/client/scss -o dist/client/css",
-    "build-js": "babel src/client/js -d dist/client/js",
-    "build-client": "npm run build-css && npm run build-js",
+    "clean": "[[ -d dist ]] && rm -r dist || :",
+    "css:build": "node-sass src/client/scss -o dist/client/css",
     "watch-css": "node-sass -w src/client/scss -o dist/client/css",
-    "server": "babel-node src/server",
-    "start": "[[ -d dist ]] && rm -r dist; npm run build-client && npm run server",
-    "watch": "nodemon --watch src --exec npm run start"
+    "dev:build": "npm run css:build && babel src/client -d dist/client",
+    "dev:server": "babel-node src/server",
+    "dev:start": "npm run clean; npm run dev:build && npm run dev:server",
+    "dev:watch": "nodemon --watch src --exec npm run dev:start",
+    "prod:build": "npm run clean; babel src -d dist && npm run css:build",
+    "prod:start": "pm2 start dist/server/index.js",
+    "prod:status": "pm2 list",
+    "prod:restart": "pm2 stop all",
+    "prod:del": "pm2 delete all",
+    "prod:deploy": "cp -r -t $PROD_DIR dist package.json package-lock.json"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +26,7 @@
     "babel-preset-env": "^1.6.0",
     "express": "^4.15.3",
     "node-sass": "^4.5.3",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.11.0",
+    "pm2": "^2.6.1"
   }
 }
