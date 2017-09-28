@@ -12,7 +12,7 @@
     "dev:start": "npm run clean; npm run dev:build && npm run dev:server",
     "dev:watch": "nodemon --watch src --exec npm run dev:start",
     "prod:build": "npm run clean; babel src -d dist && npm run css:build",
-    "prod:start": "pm2 start dist/server/index.js",
+    "prod:start": "node dist/server/index.js",
     "prod:status": "pm2 list",
     "prod:restart": "pm2 stop all",
     "prod:log": "pm2 log",
