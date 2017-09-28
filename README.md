@@ -10,19 +10,15 @@ Clone the repo. Install dependencies using,
 $ npm install
 ```
 
-Create a configuration file, `src/config/config-local.js` with the following contetns
+The configuration are read either from `config/config-local.js` or from 
+os enivronment variables.
 
-```
-export const api_conf = {
-    host: "http://localhost", // funda http host
-    port: 5000
-}
-```
+The format of the local file can be found in `config/config-local.js.exmaple`
 
 Run, the command to start localserver,
 
 ```
-npm run watch
+npm run dev:watch
 ```
 
 Head onto `localhost:3000`
