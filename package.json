@@ -15,8 +15,8 @@
     "prod:start": "pm2 start dist/server/index.js",
     "prod:status": "pm2 list",
     "prod:restart": "pm2 stop all",
-    "prod:del": "pm2 delete all",
-    "prod:deploy": "cp -r -t $PROD_DIR dist package.json package-lock.json"
+    "prod:log": "pm2 log",
+    "prod:del": "pm2 delete all"
   },
   "author": "",
   "license": "ISC",
