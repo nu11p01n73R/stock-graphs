@@ -1,4 +1,4 @@
-**[Stock Graphs](https://stockgraphs.herokuapp.com/)**
+# [Stock Graphs](https://stockgraphs.herokuapp.com/)
 
 Draw charts from the data generated from [funda](https://github.com/nu11p01n73R/funda)
 
